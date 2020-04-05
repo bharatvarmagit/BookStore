@@ -19,10 +19,25 @@ import lombok.ToString;
 
 @ToString
 public class Book {
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String sku;
+	private String name;
 	private String description;
 	@Column(name="unit_price")
 	private BigDecimal unitPrice;

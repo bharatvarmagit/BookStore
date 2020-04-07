@@ -7,7 +7,7 @@ import { Book } from '../common/book';
   providedIn: 'root'
 })
 export class BookService {
-  private baseUrl ="http://localhost:8080/api/books";
+  private baseUrl ="http://localhost:8080/api/books?";
 
   constructor(private httpClient:HttpClient) { }
 

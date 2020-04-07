@@ -1,4 +1,38 @@
-<div>
-  <h1>Book Store</h1>
-  <app-book-list></app-book-list>
+<div class="wrapper">
+  <div class="content">
+    <!-- Page Content -->
+    <!-- header -->
+    <app-header></app-header>
+    <!-- /. header -->
+    <div class="container">
+      <body>
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="list-group">
+              <a href="#" class="list-group-item">Category 1</a>
+              <a href="#" class="list-group-item">Category 2</a>
+              <a href="#" class="list-group-item">Category 3</a>
+            </div>
+            <!-- /.list group -->
+          </div>
+          <!-- /.col-lg-3 -->
+
+          <div class="col-lg-9">
+            <app-book-list></app-book-list>
+          </div>
+          <!-- /.col-lg-9 -->
+        </div>
+
+        <!-- /.row -->
+      </body>
+      <!-- /. body -->
+    </div>
+    <!--/.container-->
+  </div>
+  <!-- /. content -->
+
+  <!-- Footer -->
+  <app-footer></app-footer>
+  <!-- /. Footer -->
 </div>
+<!-- wrapper -->

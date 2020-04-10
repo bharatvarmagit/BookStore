@@ -7,12 +7,14 @@ import { Book } from '../common/book';
   providedIn: 'root'
 })
 export class BookService {
-  private baseUrl ="http://localhost:8080/api/books?";
+  private baseUrl ="http://localhost:8080/api/books";
 
   constructor(private httpClient:HttpClient) { }
 
-  getbooks():Observable<Book[]>{
-    return this.httpClient.get<GetResponseBooks>(this.baseUrl).pipe(
+  getbooks(categoryId:number):Observable<Book[]>{
+    const searchUrl=`${this.baseUrl}/search/categoryid?id=${categoryId}`;
+    console.log(searchUrl);
+    return this.httpClient.get<GetResponseBooks>(searchUrl).pipe(
       map(response=>response._embedded.books)
     );
   }

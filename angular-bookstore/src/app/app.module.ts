@@ -17,12 +17,6 @@ const routes:Routes=[
   { path: '**', component: PageNotFoundComponent}
 ]
 
-const routes:Routes=[
-  {path:'books',component:BookListComponent},
-  {path:'category/:id',component:BookListComponent},
-  {path:'category',component:BookListComponent}
-]
-
 @NgModule({
   declarations: [
     AppComponent,

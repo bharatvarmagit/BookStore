@@ -9,6 +9,8 @@ import { BookService } from './services/book.service';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { BookCategoryComponent } from './components/book-category/book-category.component';
+
 
 const routes:Routes=[
   {path:'books',component:BookListComponent},
@@ -24,6 +26,7 @@ const routes:Routes=[
     HeaderComponent,
     FooterComponent,
     PageNotFoundComponent,
+    BookCategoryComponent
   ],
   imports: [
     HttpClientModule,

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Book } from '../common/book';
@@ -13,7 +13,6 @@ export class BookService {
 
   getbooks(categoryId:number):Observable<Book[]>{
     const searchUrl=`${this.baseUrl}/search/categoryid?id=${categoryId}`;
-    console.log(searchUrl);
     return this.httpClient.get<GetResponseBooks>(searchUrl).pipe(
       map(response=>response._embedded.books)
     );

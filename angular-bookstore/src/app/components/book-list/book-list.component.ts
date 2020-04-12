@@ -24,7 +24,6 @@ export class BookListComponent implements OnInit {
     const hasCategoryId:boolean=this.activatedRoute.snapshot.paramMap.has('id');
     if(hasCategoryId){
       this.currentCategoryId = +this.activatedRoute.snapshot.paramMap.get('id');
-      console.log(this.currentCategoryId);
     }
     else{
       this.currentCategoryId=1;

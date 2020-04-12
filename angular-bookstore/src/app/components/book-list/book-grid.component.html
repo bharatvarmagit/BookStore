@@ -29,6 +29,9 @@
           </div>
         </div>
       </div>
+      <div *ngIf="books?.length === 0" class="col-md-12 alert alert-warning  text-center">
+        No books Found
+      </div>
     </div>
   </div>
   <!-- /.col-lg-9 -->

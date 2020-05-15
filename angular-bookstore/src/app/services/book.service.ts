@@ -17,6 +17,10 @@ export class BookService {
       map(response=>response._embedded.books)
     );
   }
+  getbook(bookId:number):Observable<Book>{
+    const searchUrl=`${this.baseUrl}/${bookId}`;
+    return this.httpClient.get<Book>(searchUrl);
+  }
   searchbooks(keyword:string):Observable<Book[]>{
     const searchUrl=`${this.baseUrl}/search/searchbykeyword?name=${keyword}`;
     return this.httpClient.get<GetResponseBooks>(searchUrl).pipe(

@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col-lg-4 col-md-6 mb-4" *ngFor="let book of books">
         <div class="card h-100">
-          <a routerLink="/books/{{book.id}}"
+          <a routerLink="/books/{{ book.id }}"
             ><img
               class="card-img-top img-responsive"
               [src]="book.imageUrl"
@@ -17,7 +17,7 @@
           /></a>
           <div class="card-body">
             <h4 class="card-title">
-              <a routerLink="/books/{{book.id}}">{{ book.name }}</a>
+              <a routerLink="/books/{{ book.id }}">{{ book.name }}</a>
             </h4>
             <h5>{{ book.unitPrice | currency: "INR" }}</h5>
             <p class="card-text text-truncate">
@@ -29,8 +29,43 @@
           </div>
         </div>
       </div>
-      <div *ngIf="books?.length === 0" class="col-md-12 alert alert-warning  text-center">
+      <div
+        *ngIf="books?.length === 0"
+        class="col-md-12 alert alert-warning text-center"
+      >
         No books Found
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 ">
+         <div class="row">
+          <div class="col-md-4 mt-2 text-right"> Page Size:</div>
+          <div class="col-md-8">
+            <select class="form-control " (change)="updatepagesize($event.target.value)"
+            style="width:auto;" >
+            <option value="5" selected>5</option>
+            <option value="7">7</option>
+            <option value="10">10</option>
+
+        </select>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="col-md-6">
+        <!-- jw paginaion selctor below -->
+        <ngb-pagination class="d-flex justify-content-end"
+        [maxSize]="maxSize"
+  [(page)]="currentPage"
+  [pageSize]="pageSize"
+  [collectionSize]="totalRecords"
+  (pageChange)="listbooks()"></ngb-pagination>
+        <!-- <jw-pagination
+          [pageSize]="pageSize"
+          [items]="books"
+          (changePage)="pageclick($event)"
+        ></jw-pagination> -->
       </div>
     </div>
   </div>

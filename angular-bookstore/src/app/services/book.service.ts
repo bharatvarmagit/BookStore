@@ -11,21 +11,17 @@ export class BookService {
 
   constructor(private httpClient:HttpClient) { }
 
-  getbooks(categoryId:number):Observable<Book[]>{
-    const searchUrl=`${this.baseUrl}/search/categoryid?id=${categoryId}`;
-    return this.httpClient.get<GetResponseBooks>(searchUrl).pipe(
-      map(response=>response._embedded.books)
-    );
+  getbooks(categoryId:number,currentPage:number,pageSize:number):Observable<GetResponseBooks>{
+    const searchUrl=`${this.baseUrl}/search/categoryid?id=${categoryId}&page=${currentPage}&size=${pageSize}`;
+    return this.httpClient.get<GetResponseBooks>(searchUrl);
   }
   getbook(bookId:number):Observable<Book>{
     const searchUrl=`${this.baseUrl}/${bookId}`;
     return this.httpClient.get<Book>(searchUrl);
   }
-  searchbooks(keyword:string):Observable<Book[]>{
-    const searchUrl=`${this.baseUrl}/search/searchbykeyword?name=${keyword}`;
-    return this.httpClient.get<GetResponseBooks>(searchUrl).pipe(
-      map(resp=>resp._embedded.books)
-      );
+  searchbooks(keyword: string, currentPage: number, pageSize: number):Observable<GetResponseBooks>{
+    const searchUrl = `${this.baseUrl}/search/searchbykeyword?name=${keyword}&page=${currentPage}&size=${pageSize}`;
+    return this.httpClient.get<GetResponseBooks>(searchUrl);
   }
 
 }
@@ -33,4 +29,12 @@ interface GetResponseBooks{
   _embedded:{
     books:Book[];
   }
+    page:{
+      size:number,
+      totalElements:number,
+      totalPages:number,
+      number:number
+    }
+
+
 }

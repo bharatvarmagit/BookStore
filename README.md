@@ -12,29 +12,26 @@ Online book store is a web application developed using Angular and Java Spring b
 ## Search by Books Category
 ### 1. Gives the ability to search books by category selected 
  ![alt text](https://github.com/bharatvarmagit/BookStore/blob/master/images/home.png "Seach by Category")
+ ***
 ### 2. Display Details when you click on a Book
  ![alt text](https://github.com/bharatvarmagit/BookStore/blob/master/images/book_Details.png "Book_Details")
+ ***
  ### 3. Gives the ability to search for books by entering Keyword in search box
  ![alt text](https://github.com/bharatvarmagit/BookStore/blob/master/images/search.png "Seach by Keyword")
+ ***
  ### 4. Added Server Side Pagination using ng-bootstrap 
  #### ability to select page size .  data only loads as user navigates from page to page which makes it memory effecient
  ![alt text](https://github.com/bharatvarmagit/BookStore/blob/master/images/pagination.png "Pagination")
+ ***
   ### 5. Added cart status component in the header to track the items added go cart by user
   #### uses subject to communicate the click events between components
   ![alt text](https://github.com/bharatvarmagit/BookStore/blob/master/images/cart-status.png "Cart-Status")
+  ***
   ### 6. Added Checkout Page to see the items added and ability to remove items from the cart
   #### uses Behavior subjects to communicate the events between books and checkout components since 
   #### the checkout event would not be intialised when books component emitted click event.and hence we use behavior      subject to get the last event thrown by the book component before it was destroyed nad replaced by checkout component 
   ![alt text](https://github.com/bharatvarmagit/BookStore/blob/master/images/checkout.png "Checkout")
  
-  
-  
-
-
-
-
-
-
 
 # Technologies:
 

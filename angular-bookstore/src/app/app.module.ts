@@ -14,6 +14,8 @@ import { BookCategoryComponent } from './components/book-category/book-category.
 import { SearchComponent } from './components/search/search.component';
 import { BookDetailsComponent } from './components/book-details/book-details.component';
 import {JwPaginationComponent} from 'jw-angular-pagination';
+import { CartStatusComponent } from './components/cart-status/cart-status.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 
 const routes:Routes=[
@@ -21,6 +23,7 @@ const routes:Routes=[
   {path:'books',component:BookListComponent},
   {path:'category/:id',component:BookListComponent},
   {path:'search/:keyword',component:BookListComponent},
+  {path:'checkout',component:CheckoutComponent},
   {path:'',redirectTo:'/books',pathMatch:'full'},
   {path: '**', component: PageNotFoundComponent}
 ]
@@ -35,7 +38,9 @@ const routes:Routes=[
     BookCategoryComponent,
     SearchComponent,
     BookDetailsComponent,
-    JwPaginationComponent
+    JwPaginationComponent,
+    CartStatusComponent,
+    CheckoutComponent
   ],
   imports: [
     HttpClientModule,

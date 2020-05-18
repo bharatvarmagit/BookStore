@@ -3,6 +3,8 @@ import { Book } from 'src/app/common/book';
 import { BookService } from 'src/app/services/book.service';
 import { ActivatedRoute } from '@angular/router';
 import { throwIfEmpty } from 'rxjs/operators';
+import { CartService } from 'src/app/services/cart.service';
+import { CartItem } from 'src/app/common/cart-item';
 
 
 @Component({
@@ -22,7 +24,10 @@ export class BookListComponent implements OnInit {
   maxSize:number=2;
 
 
-  constructor(private bookService: BookService, private activatedRoute: ActivatedRoute) { }
+  constructor(private bookService: BookService,
+              private activatedRoute: ActivatedRoute,
+              private cartService:CartService
+              ) { }
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(() => {
@@ -80,6 +85,15 @@ export class BookListComponent implements OnInit {
   this.currentPage=1;
   this.listbooks();
 }
+//add to cart service
+addToCart(book:Book){
+  this.cartService.addToCart(new CartItem(book));
+
+
+}
+
+
+
 }
 
 

@@ -1,0 +1,41 @@
+
+<div class="container text-center mt-2">
+  <h3>Cart Summary</h3>
+
+     <table class="table table-hover ">
+    <thead class="thead-dark">
+      <tr >
+        <th>Item</th>
+        <th>Price</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+    <tbody >
+      <tr *ngFor="let book of items">
+        <td>
+          <div class="thumbnail">
+          <img src="{{ book.imageUrl }}" width="270" height="300" />
+        </div>
+        </td>
+        <td class="align-middle">{{book.unitPrice | currency:'INR'}}</td>
+        <td class="align-middle">{{book.quantity}} &nbsp; <span (click)="deleteOne(book)"><i class="fas fa-minus-circle"></i></span>
+        </td>
+      </tr >
+      <tr class="font-weight-bold">
+
+
+      <td class="align-middle "> Total </td>
+      <td class="align-middle">{{ totalPrice | currency:'INR'}}</td>
+      <td class="align-middle"> {{totalQuantity}}</td>
+
+
+      </tr>
+    </tbody>
+
+  </table>
+
+
+
+
+
+</div>

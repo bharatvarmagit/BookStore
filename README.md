@@ -10,6 +10,8 @@ Online book store is a web application developed using Angular and Java Spring b
 ## Features:
 
 ### Search by Books Category
+ Gives the ability to search books by category selected 
+ ![alt text](https://github.com/bharatvarmagit/BookStore/blob/master/images/home.png "Seach by Category")
 
 
 

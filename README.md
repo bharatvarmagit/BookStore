@@ -29,8 +29,9 @@ Online book store is a web application developed using Angular and Java Spring b
   ***
   ### 6. Added Checkout Page to see the items added and ability to remove items from the cart
   #### uses Behavior subjects to communicate the events between books and checkout components since 
-  #### the checkout event would not be intialised when books component emitted click event.and hence we use behavior      subject to get the last event thrown by the book component before it was destroyed nad replaced by checkout component 
+  #### the checkout event would not be intialised when books component emitted click event.and hence we use behavior      subject to get the last event thrown by the book component before it was destroyed and replaced by checkout component 
   ![alt text](https://github.com/bharatvarmagit/BookStore/blob/master/images/checkout.png "Checkout")
+ 
  
 
 # Technologies:
@@ -41,16 +42,19 @@ Online book store is a web application developed using Angular and Java Spring b
 * Spring Data Jpa
 * Spring Data Rest
 * MySQL Server
-* Git
+* Git 
 * Angular 8
 * Bootstrap 4
 * jQuery 3
+* HTML 5
+* CSS 3
 * Font awesome library 
 
 
 # Tools:
 
 * Eclipse 
+* MySQl
 * MySQL workbench
 * Visual studio code
 * Github

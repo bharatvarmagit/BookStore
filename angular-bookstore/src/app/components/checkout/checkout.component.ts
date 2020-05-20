@@ -19,8 +19,16 @@ export class CheckoutComponent implements OnInit {
               private _router:Router) { }
 
   ngOnInit() {
+    this.loadSessionItems();
     this.getItems();
     this.getTotal();
+
+  }
+  loadSessionItems() {
+    if (sessionStorage.items !== undefined) {
+      let items: CartItem[] = JSON.parse(sessionStorage.items);
+      this._cartService.cartItems = items;
+    }
   }
   getTotal() {
     this._cartService.totalPrice.subscribe(price=>this.totalPrice=price);

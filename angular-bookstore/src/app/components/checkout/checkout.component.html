@@ -1,8 +1,8 @@
 
 <div class="container text-center mt-2">
-  <h3>Cart Summary</h3>
-
-     <table class="table table-hover ">
+  <h3 class="alert  bg-dark text-white">Cart Summary</h3>
+  <h4 *ngIf="items.length===0" class="mt-5 alert alert-warning"> cart is empty</h4>
+     <table *ngIf="items.length>0" class="table table-hover ">
     <thead class="thead-dark">
       <tr >
         <th>Item</th>
@@ -18,10 +18,12 @@
         </div>
         </td>
         <td class="align-middle">{{book.unitPrice | currency:'INR'}}</td>
-        <td class="align-middle">{{book.quantity}} &nbsp; <span (click)="deleteOne(book)"><i class="fas fa-minus-circle"></i></span>
+        <td class="align-middle"><span (click)="deleteOne(book)"><i class="fas fa-minus-circle"></i></span> &nbsp;
+          {{book.quantity}} &nbsp;
+          <span (click)="addOne(book)"><i class="fas fa-plus-circle"></i></span>
         </td>
       </tr >
-      <tr class="font-weight-bold">
+      <tr *ngIf="items.length>0" class="font-weight-bold">
 
 
       <td class="align-middle "> Total </td>

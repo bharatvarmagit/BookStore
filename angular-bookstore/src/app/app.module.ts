@@ -1,12 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { BookListComponent } from './components/book-list/book-list.component';
 import { BookService } from './services/book.service';
+import {CartService} from './services/cart.service';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -16,6 +17,9 @@ import { BookDetailsComponent } from './components/book-details/book-details.com
 import {JwPaginationComponent} from 'jw-angular-pagination';
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { AuthComponent } from './components/auth/auth.component';
+import { FormsModule } from '@angular/forms';
+import { AuthInterceptorService } from './components/auth/auth-interceptor.service';
 
 
 const routes:Routes=[
@@ -24,6 +28,7 @@ const routes:Routes=[
   {path:'category/:id',component:BookListComponent},
   {path:'search/:keyword',component:BookListComponent},
   {path:'checkout',component:CheckoutComponent},
+  {path:'auth/:authmode',component:AuthComponent},
   {path:'',redirectTo:'/books',pathMatch:'full'},
   {path: '**', component: PageNotFoundComponent}
 ]
@@ -40,16 +45,21 @@ const routes:Routes=[
     BookDetailsComponent,
     JwPaginationComponent,
     CartStatusComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    AuthComponent
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
+    FormsModule,
     NgbModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [
-    BookService
+  providers: [{provide:HTTP_INTERCEPTORS,
+              useClass:AuthInterceptorService,
+             multi:true},
+    BookService,
+    CartService
   ],
   bootstrap: [AppComponent]
 })

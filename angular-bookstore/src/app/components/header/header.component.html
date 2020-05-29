@@ -17,7 +17,7 @@
         <app-search></app-search>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#"
+            <a class="nav-link" routerLink="/books"
               >Home
               <span class="sr-only">(current)</span>
             </a>
@@ -25,15 +25,27 @@
           <li class="nav-item">
             <a class="nav-link" href="#">About</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
+
+          <li *ngIf="principal" class="nav-item principal-center mr-2 ">
+            <span class="text-primary">Hi, {{ principal}}</span>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
+            <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle mr-2" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i class="fas fa-user user-icon"></i>
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <button *ngIf="!principal" class="dropdown-item" type="button" (click)="userMenu('LI')">Log In</button>
+    <button *ngIf="!principal" class="dropdown-item" type="button" (click)="userMenu('SU')">Sign Up</button>
+    <button *ngIf="principal" class="dropdown-item" type="button" (click)="userMenu('LO')">Log Out</button>
+  </div>
+</div>
+
           </li>
           <li class="nav-item">
             <app-cart-status></app-cart-status>
           </li>
+
         </ul>
       </div>
     </div>

@@ -43,14 +43,16 @@ export class CheckoutComponent implements OnInit {
 
     this.getItems();
 
-    this.checkEmpty();
+
     this.getTotal();
 
   }
-
-  checkEmpty(){
-    if (this.items.length === 0) {
-      this._router.navigate(['books'])
-    }
+  addOne(book:CartItem){
+    this._cartService.addToCart(book);
+    this.getItems();
+    this.getTotal();
   }
+
+
+
 }

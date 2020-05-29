@@ -32,13 +32,11 @@ export class CartStatusComponent implements OnInit {
   }
 
   checkout(){
-    if (this.totalQuantity<1){
-      alert("cart is empty")
-    }
-    else{
+
+
       this._router.navigate(['checkout'])
 
-    }
+
 
   }
 

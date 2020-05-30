@@ -31,6 +31,13 @@ Online book store is a web application developed using Angular and Java Spring b
   #### uses Behavior subjects to communicate the events between books and checkout components since 
   #### the checkout event would not be intialised when books component emitted click event.and hence we use behavior      subject to get the last event thrown by the book component before it was destroyed and replaced by checkout component 
   ![alt text](https://github.com/bharatvarmagit/BookStore/blob/master/images/checkout.png "Checkout")
+  ***
+  ### 7 Added authentication mechanism with user icon that displays name in the header component.
+  #### added login and sign up components and way for users to see their orders history
+ 
+  ![alt text](https://github.com/bharatvarmagit/BookStore/blob/master/images/log%20in.png "Checkout")  
+  ![alt text](https://github.com/bharatvarmagit/BookStore/blob/master/images/logged%20in.png "Checkout")
+   ![alt text](https://github.com/bharatvarmagit/BookStore/blob/master/images/sign%20up.png "Checkout")
  
  
 

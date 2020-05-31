@@ -33,11 +33,17 @@ Online book store is a web application developed using Angular and Java Spring b
   ![alt text](https://github.com/bharatvarmagit/BookStore/blob/master/images/checkout.png "Checkout")
   ***
   ### 7 Added authentication mechanism with user icon that displays name in the header component.
-  #### added login and sign up components and way for users to see their orders history
+  #### added login and sign up components and menu option for users to see their orders history
  
   ![alt text](https://github.com/bharatvarmagit/BookStore/blob/master/images/log%20in.png "Checkout")  
   ![alt text](https://github.com/bharatvarmagit/BookStore/blob/master/images/logged%20in.png "Checkout")
    ![alt text](https://github.com/bharatvarmagit/BookStore/blob/master/images/sign%20up.png "Checkout")
+   
+   ### 8 added order history that sorts by newest order firsrt by default
+  ![alt text](https://github.com/bharatvarmagit/BookStore/blob/master/images/orderhistory.png "Checkout")  
+ 
+   ### 9 added filter option to filter book by price . using output event emitters
+  ![alt text](https://github.com/bharatvarmagit/BookStore/blob/master/images/sortfilter.png "Checkout")  
  
  
 

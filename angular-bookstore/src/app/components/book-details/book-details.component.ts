@@ -26,9 +26,12 @@ export class BookDetailsComponent implements OnInit {
 
   }
   getbookinfo(){
-    const id:number=+this._activatedroute.snapshot.paramMap.get('id');
+    const id: number = +this._activatedroute.snapshot.paramMap.get('id') ;
+
     this._bookService.getbook(id).subscribe(data=>this.book=data);
-  }
+
+
+   }
 //add  to cart functionality
 addToCart(book:Book){
   this._cartService.addToCart(new CartItem(book));

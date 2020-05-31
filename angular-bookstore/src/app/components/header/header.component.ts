@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
 import { Form } from '@angular/forms';
+import { CartService } from 'src/app/services/cart.service';
+import { Order } from 'src/app/common/order';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +15,8 @@ export class HeaderComponent implements OnInit {
   principal:string;
 
   constructor(private router:Router,
-    private authService:AuthService) { }
+    private authService:AuthService,
+    private cartService:CartService) { }
 
   ngOnInit() {
     this.checkLocalStore();
@@ -24,13 +27,16 @@ export class HeaderComponent implements OnInit {
   checkLocalStore() {
     const username = localStorage.USER;
     const password = localStorage.PASS;
-    console.log(username,password);
+
     if (username !== undefined && password !== undefined) {
       const form: FormData=new FormData();
       form.append("username", username);
       form.append("password", password);
       this.authService.logInService(null,form)
-      .subscribe(data=>this.authService.principal.next(data));
+      .subscribe(data=>{
+
+      this.authService.principal.next(data)
+      });
     }
   }
   userMenu(s:string)
@@ -41,11 +47,14 @@ export class HeaderComponent implements OnInit {
     if (s==="SU"){
         this.router.navigate(['auth/signup']);
     }
-    if (s=="LO"){
+    if (s==="LO"){
       this.authService.principal.next(null);
       localStorage.removeItem("USER");
       localStorage.removeItem("PASS");
       }
+    if(s==="GO"){
+      this.router.navigate(["/ordershistory"]);
+    }
 
   }
 

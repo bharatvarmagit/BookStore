@@ -32,10 +32,13 @@
         <div class="form-group">
           <label for="password">Re-enter Password</label>
           <input type="password"
+          [ngClass]="{passwordmismatch:f.value.password!==f.value.rpassword}"
           class="form-control"
           ngModel
           name="rpassword"
-          required>
+          required
+
+          >
         </div>
       </div>
     </div>
@@ -54,7 +57,7 @@
 
     <div class="row text-center">
       <div class="col-md-6">
-    <button class="btn btn-primary" type="submit" [disabled]="!f.valid">{{message}}</button>
+    <button class="btn btn-primary" type="submit" [disabled]="!f.valid || (f.value.password!==f.value.rpassword && loginMode===false) ">{{message}}</button>
 
     </div>
     </div>

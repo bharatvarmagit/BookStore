@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Book } from '../common/book';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,6 +20,14 @@ export class BookService {
     const searchUrl=`${this.baseUrl}/${bookId}`;
     return this.httpClient.get<Book>(searchUrl);
   }
+  getBookId(name:String):Observable<Book>{
+    const searchUrl = `${this.baseUrl}/search/bookname?name=${name}`;
+    return this.httpClient.get<Book>(searchUrl);
+
+  }
+
+
+
   searchbooks(keyword: string, currentPage: number, pageSize: number):Observable<GetResponseBooks>{
     const searchUrl = `${this.baseUrl}/search/searchbykeyword?name=${keyword}&page=${currentPage}&size=${pageSize}`;
     return this.httpClient.get<GetResponseBooks>(searchUrl);

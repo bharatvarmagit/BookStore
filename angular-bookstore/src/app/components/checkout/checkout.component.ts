@@ -52,6 +52,16 @@ export class CheckoutComponent implements OnInit {
     this.getItems();
     this.getTotal();
   }
+  placeOrder(){
+    const order={};
+
+    for(let item of this.items){
+      order[item.id]=item.quantity;
+
+    }
+
+    this._cartService.placeOrderService(order,this.totalPrice).subscribe(data=>console.log(data));
+  }
 
 
 

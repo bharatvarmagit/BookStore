@@ -20,6 +20,8 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { FormsModule } from '@angular/forms';
 import { AuthInterceptorService } from './components/auth/auth-interceptor.service';
+import { OrderListComponent } from './components/order-list/order-list.component';
+import {OrderModule} from 'ngx-order-pipe';
 
 
 const routes:Routes=[
@@ -29,6 +31,7 @@ const routes:Routes=[
   {path:'search/:keyword',component:BookListComponent},
   {path:'checkout',component:CheckoutComponent},
   {path:'auth/:authmode',component:AuthComponent},
+  {path:'ordershistory',component:OrderListComponent},
   {path:'',redirectTo:'/books',pathMatch:'full'},
   {path: '**', component: PageNotFoundComponent}
 ]
@@ -46,13 +49,15 @@ const routes:Routes=[
     JwPaginationComponent,
     CartStatusComponent,
     CheckoutComponent,
-    AuthComponent
+    AuthComponent,
+    OrderListComponent
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     FormsModule,
     NgbModule,
+    OrderModule,
     RouterModule.forRoot(routes)
   ],
   providers: [{provide:HTTP_INTERCEPTORS,

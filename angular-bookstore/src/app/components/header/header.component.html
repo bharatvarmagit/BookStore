@@ -23,7 +23,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="http://github.com/bharatvarmagit/BookStore">Code</a>
           </li>
 
           <li *ngIf="principal" class="nav-item principal-center mr-2 ">
@@ -32,12 +32,13 @@
           <li class="nav-item">
             <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle mr-2" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <i class="fas fa-user user-icon"></i>
+    <i class="fas fa-user user-icon" ></i>
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
     <button *ngIf="!principal" class="dropdown-item" type="button" (click)="userMenu('LI')">Log In</button>
     <button *ngIf="!principal" class="dropdown-item" type="button" (click)="userMenu('SU')">Sign Up</button>
     <button *ngIf="principal" class="dropdown-item" type="button" (click)="userMenu('LO')">Log Out</button>
+    <button *ngIf="principal" class="dropdown-item" type="button" (click)="userMenu('GO')">Orders History</button>
   </div>
 </div>
 

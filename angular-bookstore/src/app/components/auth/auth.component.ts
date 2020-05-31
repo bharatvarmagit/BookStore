@@ -70,7 +70,9 @@ export class AuthComponent implements OnInit {
   }
   SignUpRequest(form:NgForm){
     this.authService.signUpService(form)
-    .subscribe(data=>console.log("signed up"));
+    .subscribe(data=>{
+      this.LoginRequest(form);
+    });
   }
   LoginRequest(form: NgForm) {
     this.authService.logInService(form)
@@ -79,7 +81,6 @@ export class AuthComponent implements OnInit {
           this.wrongCredentials=true;
         }
         else{
-          console.log("setting local storage username is ", form.value.username, "password is ", form.value.password)
           localStorage.setItem('USER',form.value.username);
           localStorage.setItem('PASS',form.value.password);
         this.authService.principal.next(data);

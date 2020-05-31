@@ -1,7 +1,9 @@
 package com.bharat.bookstore.model;
 
 import java.util.Map;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -10,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapKeyJoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity(name = "User")
 public class User {
@@ -21,27 +24,9 @@ public class User {
 	@Column(name="address")
 	private String address;
 	private boolean active;
-	public boolean isActive() {
-		return active;
-	}
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-	public boolean getActive() {
-		return active;
-	}
 
 
 	private String roles ;
-	
-
-
-	public Map<Book, Integer> getSavedBooks() {
-		return savedBooks;
-	}
-	public void setSavedBooks(Map<Book, Integer> savedBooks) {
-		this.savedBooks = savedBooks;
-	}
 
 
 	@ElementCollection(fetch = FetchType.EAGER)
@@ -51,10 +36,14 @@ public class User {
     @Column(name = "count")
 	private Map<Book,Integer> savedBooks;
 	
+	@OneToMany(mappedBy = "orderedBy",cascade=CascadeType.ALL)
+	private Set<Order> orders;
+	
 	
 	public User() {
 		super();
 	}
+	
 	public User(String username, String password,Boolean active, String address,String roles, Map<Book, Integer> savedBooks) {
 		
 		this.active=active;
@@ -87,6 +76,27 @@ public class User {
 	}
 	public void setRoles(String roles) {
 		this.roles = roles;
+	}
+	
+	public Map<Book, Integer> getSavedBooks() {
+		return savedBooks;
+	}
+	public void setSavedBooks(Map<Book, Integer> savedBooks) {
+		this.savedBooks = savedBooks;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+	public boolean getActive() {
+		return active;
+	}
+
+	public Set<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
 	}
 	
 	

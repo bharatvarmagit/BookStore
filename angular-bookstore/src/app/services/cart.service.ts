@@ -1,6 +1,9 @@
 import { Injectable, OnInit } from '@angular/core';
 import { CartItem } from '../common/cart-item';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { Subject, BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Order } from '../common/order';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +14,7 @@ export class CartService {
   totalQuantity: BehaviorSubject<number> = new BehaviorSubject<number>(sessionStorage.TQ !== undefined ? sessionStorage.TQ : 0 );
 
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
 
 
 
@@ -58,4 +61,21 @@ export class CartService {
     this.totalPrice.next(totalPriceVal);
     this.totalQuantity.next(totalQuantityVal);
   }
+
+  placeOrderService(order,price:number):Observable<any>{
+
+    const orderUrl =`http://localhost:8080/placeorder?price=${price}`;
+    return this.http.post<any>(orderUrl,order,{responseType: 'text' as 'json'});
+  }
+  getOrdersService():Observable<Order[]>{
+    const orderUrl="http://localhost:8080/getorders";
+    return this.http.get<GetOrderResponse>(orderUrl).pipe(map(data=>data["orders:"]));
+  }
+
 }
+interface GetOrderResponse {
+  "orders:":Order[];
+}
+
+
+

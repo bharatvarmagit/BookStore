@@ -34,6 +34,13 @@ export class CartService {
    this.calPriceAndQuant();
 
   }
+  clearCart(){
+    this.cartItems.length=0;
+    this.totalPrice.next(0);
+    this.totalQuantity.next(0);
+    sessionStorage.removeItem('items');
+
+  }
 
   deleteItem(item:CartItem){
     let delItem = this.cartItems.find(b => b.id === item.id);

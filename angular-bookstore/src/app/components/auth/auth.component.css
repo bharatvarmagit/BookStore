@@ -7,9 +7,10 @@ input.ng-invalid.ng-touched{
 }
 
 .centered {
-  position: fixed;
-  top: 50%;
+  position: relative;
+  top: 85px;
   left: 50%;
+  margin-left: 50px;
   /* bring your own prefixes */
   transform: translate(-50%, -50%);
 }

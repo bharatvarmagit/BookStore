@@ -1,23 +1,37 @@
-<div *ngFor="let order of orders  ">
-  <table class="table  table-hover text-center">
+<div class="row ">
+    <div class="col-2">
+      <a class="btn btn-warning" routerLink="/books">
+        <i class="fas fa-arrow-left"></i> Back</a
+      >
+    </div>
+  </div>
+  <h4 *ngIf="orders?.length === 0" class="mt-5 alert alert-warning text-">
+    No Order History to show
+  </h4>
+<h3 *ngIf="orders?.length>0" class="alert   text-dark text-center">Order  History</h3
+  ><div *ngFor="let order of orders  ">
+  <table class="table  table-hover ">
     <thead class="thead-dark ">
       <tr class="text-center">
-
-        <th>Orderened</th>
+        <th>Order ID</th>
+        <th>Ordered On</th>
         <th> Total Price </th>
-        <th>Book Name &nbsp; ---- &nbsp; Qty</th>
+        <th>Book Name &nbsp;  --- &nbsp;   Qty</th>
+        <th>Action</th>
 
       </tr>
     </thead>
 
-  <tbody class="text-center align-middle">
-
-    <td class="align-middle" [attr.rowspan]="getSpan(order.items)"><p>{{order.orderedOn | date:'short'}}</p></td>
-    <td class="align-middle" [attr.rowspan]="getSpan(order.items)"><p>{{order.totalPrice}}</p></td>
+  <tbody class=" align-middle">
+        <td class="align-middle text-center" [attr.rowspan]="getSpan(order.items)"><p>{{order.id}}</p></td>
+    <td class="align-middle text-center" [attr.rowspan]="getSpan(order.items)"><p>{{order.orderedOn | date:'short'}}</p></td>
+    <td class="align-middle text-center" [attr.rowspan]="getSpan(order.items)"><p>{{order.totalPrice}}</p></td>
     <span *ngFor="let item of order.items|keyvalue" class="d-flex justify-content-center align-items-center ">
-      <td class="align-middle" >{{item.key}}</td>&nbsp; --- &nbsp;
-      <td class="align-middle">{{item.value}}</td>
+      <td class=" btn btn-link text-left  " ><a (click)="goToBook(item.key)">{{item.key}}</a></td>&nbsp;---&nbsp;
+      <td class="">{{item.value}}</td>
     </span>
+    <td class="align-middle text-center"> <a><i class="fas fa-trash-alt " (click)="deleteOrder(order.id)"></i>
+      </a></td>
   </tbody>
 
   </table>

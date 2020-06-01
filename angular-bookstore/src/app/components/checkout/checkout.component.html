@@ -1,44 +1,81 @@
-
+<div class="row ml-1">
+    <div class="col-2">
+      <a class="btn btn-warning" routerLink="/books">
+        <i class="fas fa-arrow-left"></i> Back</a
+      >
+    </div>
+  </div>
 <div class="container text-center mt-2">
-  <h3 class="alert  bg-dark text-white">Cart Summary</h3>
-  <h4 *ngIf="items.length===0" class="mt-5 alert alert-warning"> cart is empty</h4>
-     <table *ngIf="items.length>0" class="table table-hover ">
+
+  <h3 *ngIf="items?.length > 0" class="alert  text-dark">
+    Cart Summary
+  </h3>
+  <h4 *ngIf="items?.length === 0 && !ordered" class="mt-5 alert alert-warning text-center">
+    Cart is empty
+  </h4>
+  <h4 *ngIf="ordered" class="mt-5 alert alert-success text-center">
+    Order Sucess ! redirecting  to Order History.....
+  </h4>
+  <table *ngIf="items?.length > 0" class="table table-hover">
     <thead class="thead-dark">
-      <tr >
+      <tr>
         <th>Item</th>
         <th>Price</th>
         <th>Quantity</th>
       </tr>
     </thead>
-    <tbody >
+    <tbody>
       <tr *ngFor="let book of items">
         <td>
           <div class="thumbnail">
-          <img src="{{ book.imageUrl }}" width="270" height="300" />
-        </div>
+            <img src="{{ book.imageUrl }}" width="270" height="300" />
+          </div>
         </td>
-        <td class="align-middle">{{book.unitPrice | currency:'INR'}}</td>
-        <td class="align-middle"><span (click)="deleteOne(book)"><i class="fas fa-minus-circle"></i></span> &nbsp;
-          {{book.quantity}} &nbsp;
+        <td class="align-middle">{{ book.unitPrice | currency: "INR" }}</td>
+        <td class="align-middle">
+          <span (click)="deleteOne(book)"
+            ><i class="fas fa-minus-circle"></i
+          ></span>
+          &nbsp; {{ book.quantity }} &nbsp;
           <span (click)="addOne(book)"><i class="fas fa-plus-circle"></i></span>
         </td>
-      </tr >
-      <tr *ngIf="items.length>0" class="font-weight-bold">
-
-
-      <td class="align-middle "> Total </td>
-      <td class="align-middle">{{ totalPrice | currency:'INR'}}</td>
-      <td class="align-middle"> {{totalQuantity}}</td>
-
-
+      </tr>
+      <tr *ngIf="items.length > 0" class="font-weight-bold">
+        <td class="align-middle">Total</td>
+        <td class="align-middle">{{ totalPrice | currency: "INR" }}</td>
+        <td class="align-middle">{{ totalQuantity }}</td>
       </tr>
     </tbody>
-
   </table>
-  <button class="btn btn-primary" type="button" (click)="placeOrder()">Order</button>
+  <div class="row">
+    <div class="col-5">
+      <button
+        *ngIf="items?.length !== 0"
+        class="btn btn-primary"
+        type="button"
+        (click)="clearCart()"
+      >
+        Clear Cart
+      </button>
+    </div>
+    <div class="col-2"></div>
+    <div class="col-5">
+      <button
+        *ngIf="items?.length !== 0 && principal!==null"
+        class="btn btn-primary"
+        type="button"
+        (click)="placeOrder()"
+      >
+        Order
+      </button>
+      <button
+        *ngIf="items?.length !== 0 && principal===null"
+        class="btn btn-warning "
+        type="button"
 
-
-
-
-
+      >
+        <a routerLink="/auth/login"> Login to Order</a>
+      </button>
+    </div>
+  </div>
 </div>

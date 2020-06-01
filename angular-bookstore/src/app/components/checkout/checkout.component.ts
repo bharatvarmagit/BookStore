@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { CartItem } from 'src/app/common/cart-item';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-checkout',
@@ -12,13 +13,17 @@ export class CheckoutComponent implements OnInit {
   items:CartItem[]=[];
   totalPrice:number;
   totalQuantity:number;
+  principal:string=null;
+  ordered:boolean=false;
 
 
 
   constructor(private _cartService:CartService,
-              private _router:Router) { }
+              private _router:Router,
+              private authService:AuthService) { }
 
   ngOnInit() {
+    this.authService.principal.subscribe(p=>this.principal=p)
     this.loadSessionItems();
     this.getItems();
     this.getTotal();
@@ -57,12 +62,28 @@ export class CheckoutComponent implements OnInit {
 
     for(let item of this.items){
       order[item.id]=item.quantity;
+    }
+    this._cartService.placeOrderService(order,this.totalPrice).subscribe();
+    this.items.length = 0;
+    this.clearCart();
+    this.ordered=true;
+
+    setTimeout(() => {
+      this._router.navigate(["ordershistory"]);
+    }, 1000);
+
+
+
+
+  }
+
+  clearCart(){
+    this._cartService.clearCart();
+
+    // this.getItems();
+    // this.getTotal();
 
     }
-
-    this._cartService.placeOrderService(order,this.totalPrice).subscribe(data=>console.log(data));
   }
 
 
-
-}

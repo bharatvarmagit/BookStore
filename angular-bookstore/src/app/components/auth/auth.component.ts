@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { HttpClient, HttpResponse, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { from } from 'rxjs';
 
 
 @Component({
@@ -79,6 +80,7 @@ export class AuthComponent implements OnInit {
       .subscribe((data :string) =>{
         if (data.startsWith('<')){
           this.wrongCredentials=true;
+          form.reset();
         }
         else{
           localStorage.setItem('USER',form.value.username);
@@ -96,4 +98,21 @@ export class AuthComponent implements OnInit {
     this.loginMode=!this.loginMode;
     this.message = this.loginMode === true ? 'Login' : 'Sign Up';
     }
+    demoLogin(){
+      const formdata:FormData=new FormData();
+      formdata.append("username","demouser");
+      formdata.append("password","demouser");
+      this.authService.logInService(null,formdata)
+        .subscribe((data: string) => {
+
+            localStorage.setItem('USER', "demouser");
+            localStorage.setItem('PASS', "demouser");
+            this.authService.principal.next(data);
+            this.router.navigate(['/books']);
+
+        });
+
+
+    }
+
 }

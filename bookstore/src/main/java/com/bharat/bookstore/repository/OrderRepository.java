@@ -6,4 +6,5 @@ import com.bharat.bookstore.model.Order;
 
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 	
+	
 }

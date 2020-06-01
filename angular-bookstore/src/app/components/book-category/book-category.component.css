@@ -2,3 +2,6 @@ a:hover{
 
   text-decoration: none;
 }
+.sbtn{
+  transform: scale(0.8);
+}

@@ -1,9 +1,55 @@
-<div class="list-group text-center">
-  <a
-    [routerLink]="'/category/'+bookcategory.id"
-    *ngFor="let bookcategory of bookCategories"
-    class="list-group-item"
-    routerLinkActive="bg-primary text-white font-weight-bold"
-    >{{bookcategory.name}}
-  </a>
+<div>
+  <div class="list-group text-center">
+    <a
+      [routerLink]="'/category/' + bookcategory.id"
+      *ngFor="let bookcategory of bookCategories"
+      class="list-group-item"
+      routerLinkActive="bg-primary text-white font-weight-bold"
+      >{{ bookcategory.name }}
+    </a>
+  </div>
+  <hr />
+  <div *ngIf="showFilter===undefined">
+    <div class="text-center">
+      <div class="btn btn-link">
+        <i class="fas fa-filter">
+          Filter By
+        </i>
+      </div>
+    </div>
+    <div class="">
+      <div class="text-center text-dark">
+        <form action="" #f="ngForm" (ngSubmit)="onSubmit(f)">
+          <input
+            type="radio"
+            class="mr-2"
+            ngModel
+            name="orderPrice"
+            value="A"
+            required
+          />
+          <label for="orderPrice">Price: Low to High</label>
+
+          <div>
+            <input
+              type="radio"
+              class="mr-2"
+              ngModel
+              name="orderPrice"
+              value="D"
+              required
+            />
+
+            <label for="orderPrice">Price: High to Low </label>
+          </div>
+          <input
+            class="btn btn-primary sbtn"
+            type="submit"
+            [disabled]="!f.valid"
+            value="Apply Changes"
+          />
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,13 +1,17 @@
-<div class="row">
+<div *ngIf="loading" class="d-flex justify-content-center">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+<div *ngIf="!loading" class="row">
 
   <div class="col-lg-3 col-md-3 ">
-    <app-book-category></app-book-category>
+    <app-book-category (sortCriteria)="sortBooks($event)"></app-book-category>
     <!-- /.list group -->
   </div>
   <!-- /.col-lg-3 -->
 
-
-  <div class="col-lg-9 col-md-9  col-sm-12">
+  <div  class="col-lg-9 col-md-9  col-sm-12">
     <div
         *ngIf="books?.length===0"
         class="col-md-12 alert alert-warning text-center"

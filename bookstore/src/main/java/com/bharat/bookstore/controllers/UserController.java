@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -91,6 +92,24 @@ public class UserController {
 		Map<String,Set<Order>> map=new HashMap<String, Set<Order>>();
 		map.put("orders:",user.getOrders());
 	    return map;
+		
+	}
+	@GetMapping("/getbookid")
+	public int getBookId(@RequestParam(name = "name") String name) {
+		return (int) bookRepo.findByName(name).getId();
+	}
+	@DeleteMapping("/deleteorder")
+	public String deleteOrder(@RequestParam(name="orderId") int orderId) {
+		orderRepo.deleteById(orderId);
+		return "Y";
+	}
+	@DeleteMapping("/deleteorderitem")
+	public String deleteorderitem(@RequestParam(name = "bookid") int bookId,@RequestParam(name = "orderid") int orderId)
+	{
+		Order order=orderRepo.findById(orderId).get();
+		Book book=bookRepo.getOne(new Long(bookId));
+		order.getItems().remove(book);
+		return "Y";
 		
 	}
 

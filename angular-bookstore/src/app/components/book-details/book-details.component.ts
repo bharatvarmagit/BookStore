@@ -12,13 +12,14 @@ import { CartItem } from 'src/app/common/cart-item';
 })
 export class BookDetailsComponent implements OnInit {
   book:Book ;
-
+  loading:boolean;
   constructor(private _bookService:BookService,
               private _activatedroute:ActivatedRoute,
               private _cartService:CartService
               ) { }
 
   ngOnInit() {
+    this.loading=true;
     this._activatedroute.paramMap.subscribe(()=>
     {
       this.getbookinfo();
@@ -28,7 +29,10 @@ export class BookDetailsComponent implements OnInit {
   getbookinfo(){
     const id: number = +this._activatedroute.snapshot.paramMap.get('id') ;
 
-    this._bookService.getbook(id).subscribe(data=>this.book=data);
+    this._bookService.getbook(id).subscribe(data=>{
+      this.book=data
+      this.loading=false
+    });
 
 
    }

@@ -4,19 +4,20 @@ import { Subject, BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Order } from '../common/order';
 import { map } from 'rxjs/operators';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CartService {
+export class CartService{
   cartItems:CartItem[]=[]
   totalPrice: BehaviorSubject<number> = new BehaviorSubject<number>(sessionStorage.TP !== undefined ? sessionStorage.TP : 0 );
   totalQuantity: BehaviorSubject<number> = new BehaviorSubject<number>(sessionStorage.TQ !== undefined ? sessionStorage.TQ : 0 );
+  principal:string;
 
 
-  constructor(private http:HttpClient) { }
-
-
+  constructor(private http:HttpClient,
+    private authService:AuthService) { }
 
 
 
@@ -69,13 +70,15 @@ export class CartService {
     this.totalQuantity.next(totalQuantityVal);
   }
 
-  placeOrderService(order,price:number):Observable<any>{
+  placeOrderService(order, price: number, principal: string):Observable<any>{
+    const orderUrl = `http://localhost:8080/placeorder?price=${price}`;
+       return this.http.post<any>(orderUrl, order, { responseType: 'text' as 'json' });
 
-    const orderUrl =`http://localhost:8080/placeorder?price=${price}`;
-    return this.http.post<any>(orderUrl,order,{responseType: 'text' as 'json'});
+
+
   }
-  getOrdersService():Observable<Order[]>{
-    const orderUrl="http://localhost:8080/getorders";
+  getOrdersService(principal:string):Observable<Order[]>{
+    const orderUrl =`http://localhost:8080/getorders`;
     return this.http.get<GetOrderResponse>(orderUrl).pipe(map(data=>data["orders:"]));
   }
 

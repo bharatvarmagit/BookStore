@@ -2,6 +2,7 @@ import { Component, OnInit, Output ,EventEmitter, Input} from '@angular/core';
 import { BookCategory } from 'src/app/common/bookCategory';
 import { BookCategoryService } from 'src/app/services/bookCategory.service';
 import { NgForm } from '@angular/forms';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'app-book-category',

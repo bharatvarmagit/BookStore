@@ -13,7 +13,7 @@ export class CheckoutComponent implements OnInit {
   items:CartItem[]=[];
   totalPrice:number;
   totalQuantity:number;
-  principal:string=null;
+  principal:string;
   ordered:boolean=false;
 
 
@@ -23,7 +23,8 @@ export class CheckoutComponent implements OnInit {
               private authService:AuthService) { }
 
   ngOnInit() {
-    this.authService.principal.subscribe(p=>this.principal=p)
+    this.principal=localStorage.USER;
+
     this.loadSessionItems();
     this.getItems();
     this.getTotal();
@@ -63,14 +64,15 @@ export class CheckoutComponent implements OnInit {
     for(let item of this.items){
       order[item.id]=item.quantity;
     }
-    this._cartService.placeOrderService(order,this.totalPrice).subscribe();
+
+    this._cartService.placeOrderService(order,this.totalPrice,this.principal).subscribe(data=>
+      {
+      this._router.navigate(["ordershistory"]);
+      }
+    );
     this.items.length = 0;
     this.clearCart();
     this.ordered=true;
-
-    setTimeout(() => {
-      this._router.navigate(["ordershistory"]);
-    }, 1000);
 
 
 

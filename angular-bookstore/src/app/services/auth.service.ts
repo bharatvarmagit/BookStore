@@ -8,6 +8,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class AuthService  {
   principal:BehaviorSubject<string>=new BehaviorSubject<string>(null);
+  loggedIn:BehaviorSubject<string>=new BehaviorSubject<string>("");
+
 
   constructor(private http:HttpClient) { }
 
@@ -38,6 +40,7 @@ export class AuthService  {
 
   logOutService():Observable<any>{
     const logOutUrl: string = "http://localhost:8080/logout";
+    this.loggedIn.next("Logged Out");
    return this.http.get<any>(logOutUrl, { responseType: 'text' as 'json' });
   }
 

@@ -35,7 +35,10 @@ export class HeaderComponent implements OnInit {
       this.authService.logInService(null,form)
       .subscribe(data=>{
 
-      this.authService.principal.next(data)
+        if (data==="T")
+
+      this.authService.principal.next(username);
+      this.authService.loggedIn.next("Logged In");
       });
     }
   }
@@ -49,6 +52,7 @@ export class HeaderComponent implements OnInit {
     }
     if (s==="LO"){
       this.authService.principal.next(null);
+      this.authService.loggedIn.next("Logged Out");
       localStorage.removeItem("USER");
       localStorage.removeItem("PASS");
       }

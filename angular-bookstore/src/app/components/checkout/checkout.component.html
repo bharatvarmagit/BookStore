@@ -51,7 +51,7 @@
     <div class="col-5">
       <button
         *ngIf="items?.length !== 0"
-        class="btn btn-primary"
+        class="btn btn-warning text-white"
         type="button"
         (click)="clearCart()"
       >
@@ -68,14 +68,13 @@
       >
         Order
       </button>
-      <button
-        *ngIf="items?.length !== 0 && principal===null"
-        class="btn btn-warning "
-        type="button"
 
-      >
-        <a routerLink="/auth/login"> Login to Order</a>
-      </button>
+
+
+
+        <a routerLink="/auth/login" *ngIf="items?.length !== 0 && principal===null"
+        class="btn btn-primary"> Login to Order</a>
+
     </div>
   </div>
 </div>

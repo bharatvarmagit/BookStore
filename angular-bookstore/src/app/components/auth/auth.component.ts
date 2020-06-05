@@ -3,8 +3,6 @@ import { NgForm } from '@angular/forms';
 import { HttpClient, HttpResponse, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { from } from 'rxjs';
-
 
 @Component({
   selector: 'app-auth',
@@ -48,13 +46,7 @@ export class AuthComponent implements OnInit {
         this.loginMode = false;
         this.message = "signup";
       }
-      else
-        if (this.authMode === "logout") {
 
-        }
-        else {
-
-        }
   }
 
   onSubmit(form: NgForm) {
@@ -73,7 +65,9 @@ export class AuthComponent implements OnInit {
     this.authService.signUpService(form)
     .subscribe(data=>{
       this.LoginRequest(form);
+      this.authService.loggedIn.next("Signed Up");
     });
+
   }
   LoginRequest(form: NgForm) {
     this.authService.logInService(form)
@@ -85,7 +79,8 @@ export class AuthComponent implements OnInit {
         else{
           localStorage.setItem('USER',form.value.username);
           localStorage.setItem('PASS',form.value.password);
-        this.authService.principal.next(data);
+        this.authService.principal.next(form.value.username);
+        this.authService.loggedIn.next("Logged In");
           this.router.navigate(['/books']);
         }
       });
@@ -107,7 +102,8 @@ export class AuthComponent implements OnInit {
 
             localStorage.setItem('USER', "demouser");
             localStorage.setItem('PASS', "demouser");
-            this.authService.principal.next(data);
+            this.authService.principal.next("demouser");
+            this.authService.loggedIn.next("Logged In");
             this.router.navigate(['/books']);
 
         });

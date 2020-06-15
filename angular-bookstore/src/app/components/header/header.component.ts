@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpParams } from '@angular/common/http';
+
 import { AuthService } from 'src/app/services/auth.service';
-import { Form } from '@angular/forms';
+
 import { CartService } from 'src/app/services/cart.service';
-import { Order } from 'src/app/common/order';
+
 
 @Component({
   selector: 'app-header',
@@ -25,22 +25,19 @@ export class HeaderComponent implements OnInit {
 
   }
   checkLocalStore() {
-    const username = localStorage.USER;
-    const password = localStorage.PASS;
 
-    if (username !== undefined && password !== undefined) {
-      const form: FormData=new FormData();
-      form.append("username", username);
-      form.append("password", password);
-      this.authService.logInService(null,form)
-      .subscribe(data=>{
-
-        if (data==="T")
-
-      this.authService.principal.next(username);
+    if(localStorage.token!==undefined){
+      this.authService.getPrincipalfromJwt().subscribe(data=>{
+      this.authService.principal.next(data);
       this.authService.loggedIn.next("Logged In");
       });
     }
+
+
+
+
+
+
   }
   userMenu(s:string)
   {
@@ -53,8 +50,8 @@ export class HeaderComponent implements OnInit {
     if (s==="LO"){
       this.authService.principal.next(null);
       this.authService.loggedIn.next("Logged Out");
-      localStorage.removeItem("USER");
-      localStorage.removeItem("PASS");
+      localStorage.removeItem("token");
+      this.router.navigate(["/books"]);
       }
     if(s==="GO"){
       this.router.navigate(["/ordershistory"]);

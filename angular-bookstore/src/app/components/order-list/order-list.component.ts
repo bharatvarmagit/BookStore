@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Order } from 'src/app/common/order';
 import { CartService } from 'src/app/services/cart.service';
 import {   HttpClient } from '@angular/common/http';
-import { BookService } from 'src/app/services/book.service';
+
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { pipe } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-order-list',
@@ -14,6 +12,7 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./order-list.component.css']
 })
 export class OrderListComponent implements OnInit {
+  baseUrl:string="http://localhost:8080";
   principal:string;
   orders: Order[];
 
@@ -48,14 +47,14 @@ export class OrderListComponent implements OnInit {
     return span>2?span:2;
   }
   goToBook(name:string){
-    const findurl: string =`http://localhost:8080/getbookid?name=${name}`;
+    const findurl: string =`${this.baseUrl}/getbookid?name=${name}`;
     this.http.get<number>(findurl,{responseType: 'text' as 'json'}).subscribe(data=>{
 
     this.router.navigate([`/books/${data}`])});
 
   }
   deleteOrder(id){
-    const url: string =`http://localhost:8080/deleteorder?orderId=${id}`;
+    const url: string = `${this.baseUrl}/deleteorder?orderId=${id}`;
     this.http.delete(url,{responseType:'text' as 'json'}).subscribe(
       data=>this.fetchOrders());
   }

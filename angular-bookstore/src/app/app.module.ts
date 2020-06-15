@@ -26,13 +26,13 @@ import {OrderModule} from 'ngx-order-pipe';
 
 const routes:Routes=[
   {path: 'books/:id', component: BookDetailsComponent},
-  {path:'books',component:BookListComponent},
+  {path:'books',redirectTo:'/category/1',pathMatch:'full'},
   {path:'category/:id',component:BookListComponent},
   {path:'search/:keyword',component:BookListComponent},
   {path:'checkout',component:CheckoutComponent},
   {path:'auth/:authmode',component:AuthComponent},
   {path:'ordershistory',component:OrderListComponent},
-  {path:'',redirectTo:'/books',pathMatch:'full'},
+  { path: '', redirectTo:  '/category/1',pathMatch:'full'},
   {path: '**', component: PageNotFoundComponent}
 ]
 

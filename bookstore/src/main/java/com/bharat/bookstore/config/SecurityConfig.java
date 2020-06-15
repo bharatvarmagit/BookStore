@@ -10,10 +10,13 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
+import com.bharat.bookstore.jwt.JwtTokenVerifier;
+import com.bharat.bookstore.jwt.JwtUsernamePasswordAuthFilter;
 import com.bharat.bookstore.repository.MyUserDetailsService;
 
 
@@ -29,15 +32,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stub
 		http.
-		
-		csrf().disable().cors().and().authorizeRequests()
-		.antMatchers("/**").permitAll()// anyone can access /quests/**
-        .and().formLogin().loginProcessingUrl("/login").and()
-		.logout()
-		.logoutUrl("/logout")
-		.clearAuthentication(true)
-		.invalidateHttpSession(true)
-		.deleteCookies("remember-me","JSESSIONID");
+			sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).
+			and().
+			addFilter(new JwtUsernamePasswordAuthFilter(authenticationManager())).
+			addFilterAfter(new JwtTokenVerifier() , JwtUsernamePasswordAuthFilter.class).
+//			requiresChannel().antMatchers("/**").requiresSecure().and().
+			csrf().disable().cors().and()
+			
+			.authorizeRequests()
+			.antMatchers("/","index","/css/*","/js/*","/api/**").permitAll()
+	
+		.anyRequest()
+		.authenticated();// anyone can access /quests/**
+        
+	
 		
 	}
 
@@ -52,7 +60,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	    CorsConfiguration configuration = new CorsConfiguration();
 	    configuration.setAllowedOrigins(Collections.singletonList("*")); // todo properties by environment
 	    configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"));
-	    configuration.setAllowedHeaders(Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization","WithCredentials","Access-Control-Allow-Origin"));
+	    configuration.setAllowedHeaders(Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization","WithCredentials"));
+	    configuration.addExposedHeader("Authorization");
+	    configuration.setExposedHeaders(Collections.singletonList("Authorization"));
 	    configuration.setAllowCredentials(true);
 	
 	    org.springframework.web.cors.UrlBasedCorsConfigurationSource source = new org.springframework.web.cors.UrlBasedCorsConfigurationSource();

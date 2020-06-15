@@ -81,6 +81,8 @@ export class CheckoutComponent implements OnInit {
 
   clearCart(){
     this._cartService.clearCart();
+    this.items.length=0;
+    sessionStorage.removeItem('items');
 
     // this.getItems();
     // this.getTotal();

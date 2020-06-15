@@ -10,6 +10,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class CartService{
+  baseUrl: String = "http://localhost:8080";
   cartItems:CartItem[]=[]
   totalPrice: BehaviorSubject<number> = new BehaviorSubject<number>(sessionStorage.TP !== undefined ? sessionStorage.TP : 0 );
   totalQuantity: BehaviorSubject<number> = new BehaviorSubject<number>(sessionStorage.TQ !== undefined ? sessionStorage.TQ : 0 );
@@ -36,10 +37,14 @@ export class CartService{
 
   }
   clearCart(){
-    this.cartItems.length=0;
+    this.cartItems=[];
     this.totalPrice.next(0);
     this.totalQuantity.next(0);
     sessionStorage.removeItem('items');
+    sessionStorage.TP=0;
+    sessionStorage.TQ=0;
+
+
 
   }
 
@@ -71,14 +76,14 @@ export class CartService{
   }
 
   placeOrderService(order, price: number, principal: string):Observable<any>{
-    const orderUrl = `http://localhost:8080/placeorder?price=${price}`;
+    const orderUrl = `${this.baseUrl}/placeorder?price=${price}`;
        return this.http.post<any>(orderUrl, order, { responseType: 'text' as 'json' });
 
 
 
   }
   getOrdersService(principal:string):Observable<Order[]>{
-    const orderUrl =`http://localhost:8080/getorders`;
+    const orderUrl = `${this.baseUrl}/getorders`;
     return this.http.get<GetOrderResponse>(orderUrl).pipe(map(data=>data["orders:"]));
   }
 

@@ -61,7 +61,7 @@
     <div class="col-2"></div>
     <div class="col-5">
       <button
-        *ngIf="items?.length !== 0 && principal!==null"
+        *ngIf="items?.length !== 0 && principal"
         class="btn btn-primary"
         type="button"
         (click)="placeOrder()"
@@ -72,7 +72,7 @@
 
 
 
-        <a routerLink="/auth/login" *ngIf="items?.length !== 0 && principal===null"
+        <a routerLink="/auth/login" *ngIf="items?.length !== 0 && !principal"
         class="btn btn-primary"> Login to Order</a>
 
     </div>

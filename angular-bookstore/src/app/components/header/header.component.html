@@ -26,24 +26,26 @@
             <a class="nav-link text-white" href="http://github.com/bharatvarmagit/BookStore">Code <i class="fa fa-code" aria-hidden="true"></i></a>
           </li>
 
-          <li *ngIf="principal" class="nav-item principal-center mr-2 ">
-            <span class="text-primary">Hi, {{ principal}}</span>
+          <li *ngIf="principal" class="nav-item  mt-2 mr-3 ">
+            <span class="text-primary ">Hi, {{ principal}}</span>
           </li>
           <li class="nav-item">
             <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle mr-2" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <i class="fas fa-user user-icon" ></i>
   </button>
+
   <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
     <button *ngIf="!principal" class="dropdown-item" type="button" (click)="userMenu('LI')">Log In</button>
     <button *ngIf="!principal" class="dropdown-item" type="button" (click)="userMenu('SU')">Sign Up</button>
     <button *ngIf="principal" class="dropdown-item" type="button" (click)="userMenu('LO')">Log Out</button>
     <button *ngIf="principal" class="dropdown-item" type="button" (click)="userMenu('GO')">Orders History</button>
   </div>
-</div>
+  </div>
+
 
           </li>
-          <li class="nav-item">
+          <li class="nav-item text-white ">
             <app-cart-status></app-cart-status>
           </li>
 

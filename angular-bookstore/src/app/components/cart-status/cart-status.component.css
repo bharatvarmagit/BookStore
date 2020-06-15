@@ -5,3 +5,7 @@
   font-size: smaller;
   color: darkorange;
 }
+
+.cartcomp{
+  transform:scale(0.85) ;
+}

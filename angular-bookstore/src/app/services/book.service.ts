@@ -8,7 +8,7 @@ import { Book } from '../common/book';
   providedIn: 'root'
 })
 export class BookService {
-  private baseUrl ="http://localhost:8080/api/books";
+  private baseUrl ="https://33b776546c78.ngrok.io/api/books";
 
   constructor(private httpClient:HttpClient) { }
 

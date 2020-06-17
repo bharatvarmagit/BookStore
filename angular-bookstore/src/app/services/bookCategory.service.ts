@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class BookCategoryService {
-  private baseUrl = "http://localhost:8080/api/book-category";
+  private baseUrl = "https://33b776546c78.ngrok.io/api/book-category";
 
   constructor(private httpClient: HttpClient) { }
 

@@ -4,6 +4,7 @@ import { HttpClient, HttpResponse, HttpHeaderResponse, HttpHeaders } from '@angu
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { AuthRequest } from 'src/app/common/authRequest';
+import { error } from 'util';
 
 @Component({
   selector: 'app-auth',
@@ -84,7 +85,7 @@ export class AuthComponent implements OnInit {
           this.authService.loggedIn.next("Logged In");
           this.router.navigate(['/books']);
 
-      });
+      },error=>this.wrongCredentials=true);
 
   }
 

@@ -27,10 +27,10 @@
     <td class="align-middle text-center" [attr.rowspan]="getSpan(order.items)"><p>{{order.orderedOn | date:'short'}}</p></td>
     <td class="align-middle text-center" [attr.rowspan]="getSpan(order.items)"><p>{{order.totalPrice}}</p></td>
     <span *ngFor="let item of order.items|keyvalue" class="d-flex justify-content-center align-items-center ">
-      <td class=" btn btn-link text-left  " ><a (click)="goToBook(item.key)">{{item.key}}</a></td>&nbsp;---&nbsp;
+      <td class=" btn btn-link text-left " ><a (click)="goToBook(item.key)">{{item.key}}</a></td>&nbsp;---&nbsp;
       <td class="">{{item.value}}</td>
     </span>
-    <td class="align-middle text-center"> <a><i class="fas fa-trash-alt " (click)="deleteOrder(order.id)"></i>
+    <td class="align-middle text-center"> <a style="color:red;"><i class="fas fa-trash-alt " (click)="deleteOrder(order.id)"></i>
       </a></td>
   </tbody>
 

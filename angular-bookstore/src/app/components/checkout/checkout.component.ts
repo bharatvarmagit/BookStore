@@ -23,7 +23,7 @@ export class CheckoutComponent implements OnInit {
               private authService:AuthService) { }
 
   ngOnInit() {
-    this.principal=localStorage.USER;
+    this.authService.principal.subscribe(p=>this.principal=p);
 
     this.loadSessionItems();
     this.getItems();

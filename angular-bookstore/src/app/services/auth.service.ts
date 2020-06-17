@@ -10,7 +10,7 @@ import { observeOn } from 'rxjs/operators';
 })
 export class AuthService  {
 
-  baseUrl: string ="http://localhost:8080/";
+  baseUrl: string ="https://33b776546c78.ngrok.io/";
   principal:BehaviorSubject<string>=new BehaviorSubject<string>(null);
   loggedIn:BehaviorSubject<string>=new BehaviorSubject<string>("");
 

@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./order-list.component.css']
 })
 export class OrderListComponent implements OnInit {
-  baseUrl:string="http://localhost:8080";
+  baseUrl: string ="https://33b776546c78.ngrok.io";
   principal:string;
   orders: Order[];
 

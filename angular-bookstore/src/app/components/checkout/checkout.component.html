@@ -33,11 +33,11 @@
         </td>
         <td class="align-middle">{{ book.unitPrice | currency: "INR" }}</td>
         <td class="align-middle">
-          <span (click)="deleteOne(book)"
-            ><i class="fas fa-minus-circle"></i
+          <span (click)="deleteOne(book)" style="color:goldenrod;"
+            ><i class="fas fa-minus-circle "></i
           ></span>
           &nbsp; {{ book.quantity }} &nbsp;
-          <span (click)="addOne(book)"><i class="fas fa-plus-circle"></i></span>
+          <span (click)="addOne(book)" style="color:seagreen;"><i class="fas fa-plus-circle"></i></span>
         </td>
       </tr>
       <tr *ngIf="items.length > 0" class="font-weight-bold">
@@ -51,7 +51,7 @@
     <div class="col-5">
       <button
         *ngIf="items?.length !== 0"
-        class="btn btn-warning text-white"
+        class="btn btn-danger text-white"
         type="button"
         (click)="clearCart()"
       >
@@ -62,7 +62,7 @@
     <div class="col-5">
       <button
         *ngIf="items?.length !== 0 && principal"
-        class="btn btn-primary"
+        class="btn btn-success"
         type="button"
         (click)="placeOrder()"
       >

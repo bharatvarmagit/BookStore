@@ -66,7 +66,7 @@ export class AuthComponent implements OnInit {
   }
   SignUpRequest(form: NgForm) {
 
-
+    this.credentials = new AuthRequest(form.value["username"], form.value["password"]);
     this.authService.signUpService(this.credentials)
       .subscribe(data => {
         this.LoginRequest(form);

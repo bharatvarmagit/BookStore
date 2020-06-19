@@ -38,7 +38,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
     <button *ngIf="!principal" class="dropdown-item" type="button" (click)="userMenu('LI')">Log In</button>
     <button *ngIf="!principal" class="dropdown-item" type="button" (click)="userMenu('SU')">Sign Up</button>
-    <button *ngIf="principal" class="dropdown-item" type="button" (click)="userMenu('EP')"> Edit Profile </button>
+    <!-- <button *ngIf="principal" class="dropdown-item" type="button" (click)="userMenu('EP')"> Edit Profile </button> -->
     <button *ngIf="principal" class="dropdown-item" type="button" (click)="userMenu('LO')">Log Out</button>
     <button *ngIf="principal" class="dropdown-item" type="button" (click)="userMenu('GO')">Orders History</button>
   </div>

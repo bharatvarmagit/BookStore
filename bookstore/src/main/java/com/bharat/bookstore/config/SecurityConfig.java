@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			csrf().disable().cors().and()
 			
 			.authorizeRequests()
-			.antMatchers("/","index","/css/*","/js/*","/api/**").permitAll()
+			.antMatchers("/","index","/css/*","/js/*","/api/**","/*").permitAll()
 	
 		.anyRequest()
 		.authenticated();// anyone can access /quests/**

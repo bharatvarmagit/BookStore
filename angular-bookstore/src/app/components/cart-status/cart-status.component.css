@@ -1,1 +1,11 @@
 
+.cartnum{
+  margin-left:-18px;
+  vertical-align: top;
+  font-size: smaller;
+  color: darkorange;
+}
+
+.cartcomp{
+  transform:scale(0.85) ;
+}

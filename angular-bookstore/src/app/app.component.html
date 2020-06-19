@@ -3,9 +3,13 @@
     <!-- Page Content -->
     <!-- header -->
     <app-header></app-header>
+     <p class="text-center ">
+        <ngb-alert class="expandable" *ngIf="successMessage" type="success" (close)="successMessage = ''">{{ successMessage }}</ngb-alert>
+        </p>
     <!-- /. header -->
-    <div class="container">
+    <div class="container bodyele">
       <body>
+
         <router-outlet></router-outlet>
       </body>
       <!-- /. body -->

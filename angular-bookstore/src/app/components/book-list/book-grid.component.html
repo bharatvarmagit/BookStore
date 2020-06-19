@@ -1,17 +1,29 @@
-<div class="row">
-  <div class="col-lg-3">
-    <app-book-category></app-book-category>
+<div *ngIf="loading" class="d-flex justify-content-center">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+<div *ngIf="!loading" class="row">
+
+  <div class="col-lg-3 col-md-3 ">
+    <app-book-category (sortCriteria)="sortBooks($event)"></app-book-category>
     <!-- /.list group -->
   </div>
   <!-- /.col-lg-3 -->
 
-  <div class="col-lg-9">
+  <div  class="col-lg-9 col-md-9  col-sm-12">
+    <div
+        *ngIf="books?.length===0"
+        class="col-md-12 alert alert-warning text-center"
+      >
+        No books Found
+      </div>
     <div class="row">
       <div class="col-lg-4 col-md-6 mb-4" *ngFor="let book of books">
         <div class="card h-100">
           <a routerLink="/books/{{ book.id }}"
             ><img
-              class="card-img-top img-responsive"
+              class="card-img-top  "
               [src]="book.imageUrl"
               alt="No Image"
           /></a>
@@ -24,19 +36,14 @@
               {{ book.description }}
             </p>
           </div>
-          <div class="card-footer">
-            <button class="btn btn-primary float-right" (click)="addToCart(book)">Add to Cart</button>
+          <div class="card-footer text-center">
+            <button class="btn btn-primary " (click)="addToCart(book)">Add to Cart</button>
           </div>
         </div>
       </div>
-      <div
-        *ngIf="books?.length === 0"
-        class="col-md-12 alert alert-warning text-center"
-      >
-        No books Found
-      </div>
+
     </div>
-    <div class="row">
+    <div class="row" *ngIf="books?.length!==0">
       <div class="col-md-6 ">
          <div class="row">
           <div class="col-md-4 mt-2 text-right"> Page Size:</div>
@@ -53,7 +60,7 @@
         </div>
 
       </div>
-      <div class="col-md-6">
+      <div *ngIf="books" class="col-md-6" >
         <!-- jw paginaion selctor below -->
         <ngb-pagination class="d-flex justify-content-end"
         [maxSize]="maxSize"

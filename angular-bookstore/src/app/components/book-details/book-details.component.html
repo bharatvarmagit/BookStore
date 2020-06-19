@@ -1,15 +1,20 @@
-<div class="row">
-  <div class="col-lg-3">
-    <app-book-category></app-book-category>
+<div *ngIf="loading" class="d-flex justify-content-center">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+<div *ngIf="!loading" class="row">
+  <div class="col-lg-3  ">
+    <app-book-category showFilter="yes" ></app-book-category>
     <!-- /.list group -->
   </div>
   <!-- /.col-lg-3 -->
 
-  <div class="col-lg-9">
-    <div class="row">
+  <div class="col-lg-9 c">
+    <div class="row" *ngIf="book">
       <!-- to dispplay book Image -->
       <div class="col-12 col-md-5">
-        <div class="thumbnail">
+        <div class="thumbnail" >
           <img src="{{ book.imageUrl }}" width="270" height="370" />
         </div>
       </div>

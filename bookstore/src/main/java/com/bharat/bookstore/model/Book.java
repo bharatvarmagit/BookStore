@@ -12,12 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.ToString;
-
 @Entity
 @Table(name="book")
 
-@ToString
+
 public class Book {
 	/**
 	 * @return the name
@@ -134,6 +132,15 @@ public class Book {
 	@ManyToOne
 	@JoinColumn(name="category_id",nullable=false)
 	private BookCategory category;
+
+	@Override
+	public String toString() {
+		return name;
+
+	}
+
 	
+	
+
 
 }

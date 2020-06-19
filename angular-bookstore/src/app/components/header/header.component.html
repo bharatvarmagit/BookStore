@@ -17,24 +17,41 @@
         <app-search></app-search>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#"
+            <a class="nav-link" routerLink="/books"
               >Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+          <li class="nav-item mr-2 ">
+            <a class="nav-link text-white" href="https://github.com/bharatvarmagit/BookStore">Code <i class="fa fa-code" aria-hidden="true"></i></a>
+          </li>
+
+          <li *ngIf="principal" class="nav-item  mt-2 mr-3 ">
+            <span class="text-primary ">Hi, {{ principal}}</span>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
+            <div class="dropdown">
+  <button class="btn btn-dark dropdown-toggle mr-2" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i class="fas fa-user user-icon" style="color:cornflowerblue" ></i>
+  </button>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <button *ngIf="!principal" class="dropdown-item" type="button" (click)="userMenu('LI')">Log In</button>
+    <button *ngIf="!principal" class="dropdown-item" type="button" (click)="userMenu('SU')">Sign Up</button>
+    <!-- <button *ngIf="principal" class="dropdown-item" type="button" (click)="userMenu('EP')"> Edit Profile </button> -->
+    <button *ngIf="principal" class="dropdown-item" type="button" (click)="userMenu('LO')">Log Out</button>
+    <button *ngIf="principal" class="dropdown-item" type="button" (click)="userMenu('GO')">Orders History</button>
+  </div>
+  </div>
+
+
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
-          <li class="nav-item">
-            <app-cart-status></app-cart-status>
-          </li>
+
+
+
+
         </ul>
       </div>
+      <app-cart-status></app-cart-status>
     </div>
   </nav>

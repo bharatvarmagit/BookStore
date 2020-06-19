@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Book } from 'src/app/common/book';
 import { BookService } from 'src/app/services/book.service';
 import { ActivatedRoute } from '@angular/router';
-import { throwIfEmpty } from 'rxjs/operators';
+
 import { CartService } from 'src/app/services/cart.service';
 import { CartItem } from 'src/app/common/cart-item';
+
+
 
 
 @Component({
@@ -22,6 +24,10 @@ export class BookListComponent implements OnInit {
   pageSize:number=5;
   totalRecords:number=0;
   maxSize:number=2;
+  sortCriteria=null;
+  loading:boolean;
+
+
 
 
   constructor(private bookService: BookService,
@@ -30,6 +36,8 @@ export class BookListComponent implements OnInit {
               ) { }
 
   ngOnInit() {
+    this.loading=true;
+
     this.activatedRoute.paramMap.subscribe(() => {
       this.listbooks();
     })
@@ -37,6 +45,7 @@ export class BookListComponent implements OnInit {
 
   //determine search mode is url has keyword? handlesearch or handlelist
   listbooks() {
+
     this.searchmode = this.activatedRoute.snapshot.paramMap.has('keyword');
     if (this.searchmode) {
       this.handlesearchbooks();
@@ -73,10 +82,13 @@ export class BookListComponent implements OnInit {
 
   handlePagination() {
     return data => {
+
       this.books = data._embedded.books;
       this.currentPage = data.page.number + 1;
       this.totalRecords = data.page.totalElements;
       this.pageSize = data.page.size;
+      this.sortBooks(this.sortCriteria);
+      this.loading=false
     }
   }
   //update page size
@@ -91,7 +103,19 @@ addToCart(book:Book){
 
 
 }
-
+sortBooks(val){
+  if (val===undefined){
+    return;
+  }
+  this.sortCriteria=val;
+  if (val==="A")
+  {
+  this.books.sort((a: Book, b: Book) => { return (a.unitPrice > b.unitPrice ? 1 : -1) })
+  }
+  else{
+    this.books.sort((a: Book, b: Book) => { return (a.unitPrice < b.unitPrice ? 1 : -1) })
+  }
+}
 
 
 }
